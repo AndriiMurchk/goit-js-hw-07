@@ -10,14 +10,16 @@ function createGallaryMarkup(items) {
     return items
     .map(
         (item) => `
-            <a class="gallery__item" href="${item.original}">
+        <div class="gallery">
+            <a class="galery__item" href="${item.original}">
             <img 
             class="gallery__image"
             src="${item.preview}"
             data-source="${item.original}"
-            alt="Image ${item.description}"
+            title="${item.description}"
             />
-            </a>`
+            </a>
+            </div>`
     )
     .join("");
 
@@ -37,8 +39,7 @@ function onImageClick (evt) {
         return
     }
 
-    const lightbox  = new SimpleLightbox('.gallery a',{captionsData:"Ok"});
+    const gallery = new SimpleLightbox('.gallery a', {captionDelay:250,});
 
-
+  
 }
-
