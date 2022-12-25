@@ -29,17 +29,4 @@ const addGalleryMarkup = createGallaryMarkup(galleryItems);
 
 divRef.innerHTML = addGalleryMarkup;
 
-divRef.addEventListener("click", onImageClick);
-
-function onImageClick (evt) {
-    //Забороан выдкриття картинки за посиланням
-    evt.preventDefault();
-
-    if (evt.target.nodeName !== "IMG") {
-        return
-    }
-
-    const gallery = new SimpleLightbox('.gallery a', {captionDelay:250,});
-
-  
-}
+const gallery = new SimpleLightbox('.gallery a', {captionDelay:250, });

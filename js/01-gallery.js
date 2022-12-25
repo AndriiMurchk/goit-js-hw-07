@@ -31,6 +31,18 @@ divRef.innerHTML = addGalleryMarkup;
 
 divRef.addEventListener("click", onImageClick);
 
+const instance = basicLightbox.create(`
+<img class="modal-img" src="">`,{
+    onShow: instance => {
+        document.addEventListener('keydown', onEscClick);
+    },
+
+    onClose: instance => {
+        document.removeEventListener('keydown', onEscClick);
+    },
+});
+
+
 function onImageClick (evt) {
     //Забороан выдкриття картинки за посиланням
     evt.preventDefault();
@@ -39,19 +51,15 @@ function onImageClick (evt) {
         return
     }
 
-    const instance = basicLightbox.create(`
-        <img src="${evt.target.dataset.source}" width="800" height="600">
-`);
+    instance.element().querySelector('img').src = evt.target.dataset.source;
+   
+    instance.show();
+}
 
-instance.show();
-
-divRef.addEventListener("keydown", (evt) => {
-    if (evt.code==="Escape") {
+function onEscClick(evt) {
+    if (evt.key === 'Escape') {
         instance.close();
+        return;
     }
-});
 }
 
-function blockStandartAction(evt) {
-    evt.preventEDefault();
-}
